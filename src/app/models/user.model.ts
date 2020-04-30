@@ -8,4 +8,8 @@ export class User {
     public email: string,
   ) { }
 
+  static fromFirebase( { uid, name, email } ){
+    return new User(uid, name, email);
+  }
+
 }
