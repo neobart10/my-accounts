@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-accounts-app-27a98": {
+      "hosting": {
+        "mis-cuentas4": [
+          "my-accounts-app-27a98"
+        ]
+      }
+    }
+  }
+}

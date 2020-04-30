@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "mis-cuentas4",
+      "public": "dist/mis-cuentas",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
