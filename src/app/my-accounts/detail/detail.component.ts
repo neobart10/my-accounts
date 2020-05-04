@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import {AppState} from "../../app.reducer";
+import {Account} from "../../models/account.model";
+import {Subscription} from "rxjs";
+import {AccountService} from "../../services/account.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-detail',
@@ -6,11 +12,27 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  accounts: Account[] = [];
+  accountsSubs: Subscription;
+
+  constructor( private store: Store<AppState>, private accountService: AccountService ) { }
 
   ngOnInit(): void {
+    this.accountsSubs = this.store.select('account').subscribe( ({ items }) => {
+      this.accounts = items;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.accountsSubs.unsubscribe();
+  }
+
+  delete(uid: string){
+    this.accountService.deleteAccount(uid)
+      .then( () => Swal.fire( 'Borrado', 'Item borrado', 'success' ) )
+      .catch( err => Swal.fire('Error', err.message, 'error') );
   }
 
 }
