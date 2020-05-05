@@ -12,9 +12,9 @@ const routes: Routes = [
   {  path: 'register', component: RegisterComponent },
   {
     path: '',
-    component: DashboardComponent,
-    children: dashboardRoutes,
-    canActivate: [ AuthGuard ]
+    canLoad: [ AuthGuard ],
+    loadChildren: () => import('./my-accounts/my-accounts.module')
+      .then( m => m.MyAccountsModule )
   },
   {  path: '**', redirectTo: '' }
 ];

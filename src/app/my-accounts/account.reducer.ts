@@ -1,9 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import {Account} from "../models/account.model";
 import {setItems, sunSetItems} from "./account.actions";
+import {AppState} from "../app.reducer";
 
 export interface State {
   items: Account[];
+}
+
+export interface AppStateWithAccount extends AppState{
+  account: State;
 }
 
 export const initialState: State = {

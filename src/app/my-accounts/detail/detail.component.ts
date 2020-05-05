@@ -5,6 +5,7 @@ import {Account} from "../../models/account.model";
 import {Subscription} from "rxjs";
 import {AccountService} from "../../services/account.service";
 import Swal from "sweetalert2";
+import {AppStateWithAccount} from "../account.reducer";
 
 @Component({
   selector: 'app-detail',
@@ -17,7 +18,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   accounts: Account[] = [];
   accountsSubs: Subscription;
 
-  constructor( private store: Store<AppState>, private accountService: AccountService ) { }
+  constructor( private store: Store<AppStateWithAccount>, private accountService: AccountService ) { }
 
   ngOnInit(): void {
     this.accountsSubs = this.store.select('account').subscribe( ({ items }) => {
